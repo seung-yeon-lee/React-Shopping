@@ -22,7 +22,7 @@
   integrity sha512-TPSvJfv73ng0pfnEOh17bYMPQbI95+nGWc71Ss4vZdRBHTDqmM9Z8ZV4rYz8Ks7sfzc95n30k6ODIq5UGnXcYQ==
   dependencies:
     browserslist "^4.12.0"
-    invariant "^2.2.4"
+    invariant "^2.2.4"  
     semver "^5.5.0"
 
 "@babel/compat-data@^7.8.4":
