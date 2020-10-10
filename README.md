@@ -1,3 +1,3 @@
-## React Shooping App
-
+## React Shopping App
+  React, React-router, Redux,를 이용하여 쇼핑 웹 사이트 장바구니 기능 상세 
 ...
