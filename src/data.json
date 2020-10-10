@@ -13,40 +13,40 @@
       "title": "Shopping Item 2",
       "image": "/images/dress2.jpg",
       "description": "secondList",
-      "price": 100,
-      "size": ["XL", "XXL"]
+      "price": 99,
+      "size": ["L"]
     },
     {
       "_id": "list3",
       "title": "Shopping Item 3",
-      "image": "/images/dress3.jpg",
+      "image": "/images/dress4.jpg",
       "description": "thirdList",
-      "price": 40,
+      "price": 66,
+      "size": ["S", "XS"]
+    },
+    {
+      "_id": "list4",
+      "title": "Shopping Item 4",
+      "image": "/images/dress5.jpg",
+      "description": "thirdList",
+      "price": 55,
       "size": ["XL", "XXL"]
     },
     {
-      "_id": "list3",
-      "title": "Shopping Item 3",
-      "image": "/images/dress3.jpg",
+      "_id": "list5",
+      "title": "Shopping Item 5",
+      "image": "/images/dress1.jpg",
       "description": "thirdList",
-      "price": 40,
-      "size": ["XL", "XXL"]
+      "price": 32,
+      "size": ["M"]
     },
     {
-      "_id": "list3",
-      "title": "Shopping Item 3",
-      "image": "/images/dress3.jpg",
+      "_id": "list6",
+      "title": "Shopping Item 6",
+      "image": "/images/dress2.jpg",
       "description": "thirdList",
-      "price": 40,
-      "size": ["XL", "XXL"]
-    },
-    {
-      "_id": "list3",
-      "title": "Shopping Item 3",
-      "image": "/images/dress3.jpg",
-      "description": "thirdList",
-      "price": 40,
-      "size": ["XL", "XXL"]
+      "price": 1,
+      "size": ["XL"]
     }
   ]
 }
