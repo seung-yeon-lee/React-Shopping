@@ -121,3 +121,17 @@ footer {
 .button-primary {
   background-color: #f0c040;
 }
+.filter {
+  display: flex;
+  padding: 0.5rem;
+  margin: 0.1rem;
+  justify-content: space-between;
+  border-bottom: 0.2rem #c0c0c0 solid;
+}
+.filter div {
+  flex: 1;
+}
+select {
+  border-radius: 15rem;
+  cursor: pointer;
+}
