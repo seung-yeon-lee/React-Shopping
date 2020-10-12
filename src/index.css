@@ -110,9 +110,10 @@ footer {
 .button {
   padding: 1rem;
   border: 0.1rem #c0c0c0 solid;
-  border-radius: 2rem;
-  background: #f0f0f0;
+  border-radius: 1rem;
+  background: #0b34af;
   cursor: pointer;
+  color: #ffffff;
 }
 .button:hover {
   border: 0.1rem #808080 solid;
@@ -120,6 +121,7 @@ footer {
 
 .button-primary {
   background-color: #f0c040;
+  color: #203040;
 }
 .filter {
   display: flex;
@@ -134,4 +136,53 @@ footer {
 select {
   border-radius: 15rem;
   cursor: pointer;
+}
+
+/* Index.css */
+.cart {
+  padding: 0.1rem;
+  margin: 1rem;
+  display: flex;
+}
+.cart-header {
+  border-bottom: 0.1rem #c0c0c0 solid;
+}
+
+.cart-items {
+  padding: 0;
+  width: 100%;
+  list-style-type: none;
+}
+.cart-items img {
+  width: 5rem;
+}
+.cart-items li {
+  display: flex;
+}
+.cart-items li div {
+  padding: 0.5rem;
+}
+.cart-items li div:last-child {
+  flex: 1;
+}
+
+.right {
+  text-align: right;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  padding: 0.5rem;
+  border-top: 1px black solid;
+}
+
+.total > div {
+  font-size: 2rem;
+}
+.total > div,
+.total > button {
+  flex: 1;
 }
