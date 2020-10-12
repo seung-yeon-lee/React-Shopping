@@ -3,7 +3,8 @@ import { formats } from "../util";
 
 export default class Products extends Component {
   render() {
-    const { products } = this.props;
+    const { products, addToCart } = this.props;
+
     return (
       <div>
         <ul className="products">
@@ -16,7 +17,10 @@ export default class Products extends Component {
                 </a>
                 <div className="product-price">
                   <div>{formats(product.price)}</div>
-                  <button className="button button-primary">
+                  <button
+                    onClick={() => addToCart(product)}
+                    className="button button-primary"
+                  >
                     장바구니에 담기
                   </button>
                 </div>
