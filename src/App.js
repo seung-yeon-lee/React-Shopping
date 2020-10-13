@@ -11,7 +11,9 @@ class App extends Component {
       products: data.products,
       size: "",
       sort: "",
-      cartItem: [],
+      cartItems: localStorage.getItem("cartItems")
+        ? JSON.parse(localStorage.getItem("cartItems"))
+        : [],
     };
   }
   filterProducts = (e) => {
@@ -51,29 +53,44 @@ class App extends Component {
     }));
   };
   addToCart = (product) => {
-    const cartItems = this.state.cartItem;
-    let already = false;
+    const cartItems = this.state.cartItems;
+    let already = true;
     cartItems.map((item) => {
+      //처리과정 지난 후 수량으로인해 먼저 작성
       if (item._id === product._id) {
         item.count++;
-        already = true;
+        already = false;
       }
     });
-    if (!already) {
+    if (already) {
       cartItems.push({ ...product, count: 1 });
     }
-    this.setState({ cartItem: cartItems });
+    this.setState({ cartItems });
+    // 새로고침 시 모든 장바구니가 사라짐, 스토리지로 심플하게 관리
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
   };
+
   removeItem = (item) => {
     // para로 넘어온 id와 현재 state 주의 ex) list1 list2, list 2, list 1 ...
-    const { cartItem } = this.state; // 모든 listitem
-    const remove = cartItem.filter((v) => v._id !== item._id); //비교
-    // 일치하면 false, 다르면 true 이므로  true로 state 최신(불일치는 냅두기)
-    this.setState({ cartItem: remove });
+    const { cartItems } = this.state; // 모든 listitem
+    const remove = cartItems.filter((v) => v._id !== item._id); // 불일치 정보만 저장
+    this.setState({ cartItems: remove });
+    localStorage.setItem(
+      "cartItems",
+      JSON.stringify(cartItems.filter((v) => v._id !== item._id))
+    );
+  };
+
+  createOrder = (order) => {
+    const q = order.cartItems.map((v) => [v.title, v.price]);
+    const result = window.confirm(`${order.name} ${q[0]} ${q[1]} 상품`);
+    if (result) {
+      window.confirm("정상 처리 되었습니다");
+    }
   };
 
   render() {
-    const { products, size, sort, cartItem } = this.state;
+    const { products, size, sort, cartItems } = this.state;
     return (
       <div className="grid-container">
         <header>
@@ -92,7 +109,11 @@ class App extends Component {
               <Products products={products} addToCart={this.addToCart} />
             </div>
             <div className="sidebar">
-              <Cart cartItems={cartItem} removeItem={this.removeItem} />
+              <Cart
+                cartItems={cartItems}
+                removeItem={this.removeItem}
+                createOrder={this.createOrder}
+              />
             </div>
           </div>
         </main>
