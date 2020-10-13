@@ -90,8 +90,8 @@ footer {
   height: 100%;
 }
 .product img {
-  max-width: 37rem;
-  max-height: 37rem;
+  width: 37rem;
+  height: 37rem;
 }
 .product-price {
   display: flex;
@@ -185,4 +185,23 @@ select {
 .total > div,
 .total > button {
   flex: 1;
+}
+
+input {
+  padding: 1rem;
+  border: 0.1rem #c0c0c0 solid;
+}
+form {
+  width: 100%;
+}
+/* form */
+.form-container {
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+.form-container li {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
 }
