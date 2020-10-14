@@ -82,11 +82,15 @@ class App extends Component {
   };
 
   createOrder = (order) => {
-    const q = order.cartItems.map((v) => [v.title, v.price]);
-    const result = window.confirm(`${order.name} ${q[0]} ${q[1]} 상품`);
+    const q = order.cartItems.map((v) => v.price);
+    console.log(q);
+    const result = window.confirm(
+      `${order.name}님이 선택하신 상품의 총 금액은 ${q} 입니다 계속 진행하시겠습니까?`
+    );
     if (result) {
       window.confirm("정상 처리 되었습니다");
     }
+    this.setState({ cartItems: [] });
   };
 
   render() {
