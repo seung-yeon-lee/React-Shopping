@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { formats } from "../util";
+import Fade from "react-reveal/Fade";
+
 export default class Cart extends Component {
   state = { checkOut: false, name: "", email: "", address: "" };
   showCheckOut = () => {
@@ -22,6 +24,7 @@ export default class Cart extends Component {
       cartItems: this.props.cartItems,
     };
     this.props.createOrder(order);
+    this.setState({ name: "", email: "", address: "" });
   };
   render() {
     const { cartItems, removeItem } = this.props;
@@ -37,31 +40,34 @@ export default class Cart extends Component {
         )}
         <>
           <div className="cart">
-            <ul className="cart-items">
-              {cartItems.map((item) => (
-                <li key={item._id}>
-                  <div>
-                    <img src={item.image} alt={item.title} />
-                  </div>
-                  <div>
-                    <div>{item.title}</div>
-                    <div className="right">
-                      {formats(item.price)} X {item.count}개{"   "}
-                      <button class="button" onClick={() => removeItem(item)}>
-                        삭제하기
-                      </button>
+            <Fade left cascade={true}>
+              <ul className="cart-items">
+                {cartItems.map((item) => (
+                  <li key={item._id}>
+                    <div>
+                      <img src={item.image} alt={item.title} />
                     </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
+                    <div>
+                      <div>{item.title}</div>
+                      <div className="right">
+                        {formats(item.price)} X {item.count}개{"   "}
+                        <button class="button" onClick={() => removeItem(item)}>
+                          삭제하기
+                        </button>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </Fade>
           </div>
+
           {cartItems.length !== 0 && (
             <>
               <div className="cart">
                 <div className="total">
                   <div>
-                    합계 :{" "}
+                    총 금액 :{" "}
                     {formats(
                       cartItems.reduce((x, y) => x + y.price * y.count, 0)
                     )}
@@ -75,50 +81,52 @@ export default class Cart extends Component {
                 </div>
               </div>
               {this.state.checkOut && (
-                <div className="cart">
-                  <form onSubmit={this.createOrder}>
-                    <ul className="form-container">
-                      <li>
-                        <label>이메일</label>
-                        <input
-                          value={email}
-                          type="email"
-                          name="email"
-                          placeholder="Email"
-                          onChange={this.handleInput}
-                          required
-                        />
-                      </li>
-                      <li>
-                        <label>이름</label>
-                        <input
-                          value={name}
-                          type="text"
-                          name="name"
-                          placeholder="Name"
-                          onChange={this.handleInput}
-                          required
-                        />
-                      </li>
-                      <li>
-                        <label>주소</label>
-                        <input
-                          value={address}
-                          type="text"
-                          name="address"
-                          placeholder="Address"
-                          onChange={this.handleInput}
-                          required
-                        />
-                      </li>
-                      <li>
-                        <button class="button-primary" type="submit">
-                          주문하기
-                        </button>
-                      </li>
-                    </ul>
-                  </form>
-                </div>
+                <Fade right cascade>
+                  <div className="cart">
+                    <form onSubmit={this.createOrder}>
+                      <ul className="form-container">
+                        <li>
+                          <label>이메일</label>
+                          <input
+                            value={email}
+                            type="email"
+                            name="email"
+                            placeholder="Email"
+                            onChange={this.handleInput}
+                            required
+                          />
+                        </li>
+                        <li>
+                          <label>이름</label>
+                          <input
+                            value={name}
+                            type="text"
+                            name="name"
+                            placeholder="Name"
+                            onChange={this.handleInput}
+                            required
+                          />
+                        </li>
+                        <li>
+                          <label>주소</label>
+                          <input
+                            value={address}
+                            type="text"
+                            name="address"
+                            placeholder="Address"
+                            onChange={this.handleInput}
+                            required
+                          />
+                        </li>
+                        <li>
+                          <button class="button" type="submit">
+                            주문하기
+                          </button>
+                        </li>
+                      </ul>
+                    </form>
+                  </div>
+                </Fade>
               )}
             </>
           )}

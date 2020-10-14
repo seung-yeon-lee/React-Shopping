@@ -2,49 +2,49 @@
   "products": [
     {
       "_id": "list1",
-      "title": "Shopping Item 1",
+      "title": "Test Item 1",
       "image": "/images/dress1.jpg",
-      "description": "firstList",
+      "description":  "Notice the use of %PUBLIC_URL% in the tags above It will be replaced with the URL of the `public` folder during the build. Only files inside the `public` folder can be referenced from the HTML. Unlike  will work correctly both with client-side routing and a non-root public URL. Learn how to configure a non-root public URL by running `npm run build",
       "price": 10,
       "size": ["XL", "XXL"]
     },
     {
       "_id": "list2",
-      "title": "Shopping Item 2",
+      "title": "Test Item 2",
       "image": "/images/dress2.jpg",
-      "description": "secondList",
+      "description":  "Notice the use of %PUBLIC_URL% in the tags above It will be replaced with the URL of the `public` folder during the build. Only files inside the `public` folder can be referenced from the HTML. Unlike  will work correctly both with client-side routing and a non-root public URL. Learn how to configure a non-root public URL by running `npm run build",
       "price": 99,
       "size": ["L"]
     },
     {
       "_id": "list3",
-      "title": "Shopping Item 3",
+      "title": "Test Item 3",
       "image": "/images/dress4.jpg",
-      "description": "thirdList",
+      "description":  "Notice the use of %PUBLIC_URL% in the tags above It will be replaced with the URL of the `public` folder during the build. Only files inside the `public` folder can be referenced from the HTML. Unlike  will work correctly both with client-side routing and a non-root public URL. Learn how to configure a non-root public URL by running `npm run build",
       "price": 66,
       "size": ["S", "XS"]
     },
     {
       "_id": "list4",
-      "title": "Shopping Item 4",
+      "title": "Test Item 4",
       "image": "/images/dress5.jpg",
-      "description": "thirdList",
+      "description":  "Notice the use of %PUBLIC_URL% in the tags above It will be replaced with the URL of the `public` folder during the build. Only files inside the `public` folder can be referenced from the HTML. Unlike  will work correctly both with client-side routing and a non-root public URL. Learn how to configure a non-root public URL by running `npm run build",
       "price": 55,
       "size": ["XL", "XXL"]
     },
     {
       "_id": "list5",
-      "title": "Shopping Item 5",
+      "title": "Test Item 5",
       "image": "/images/dress1.jpg",
-      "description": "thirdList",
+      "description":  "Notice the use of %PUBLIC_URL% in the tags above It will be replaced with the URL of the `public` folder during the build. Only files inside the `public` folder can be referenced from the HTML. Unlike  will work correctly both with client-side routing and a non-root public URL. Learn how to configure a non-root public URL by running `npm run build",
       "price": 32,
       "size": ["M"]
     },
     {
       "_id": "list6",
-      "title": "Shopping Item 6",
+      "title": "Test Item 6",
       "image": "/images/dress2.jpg",
-      "description": "thirdList",
+      "description":  "Notice the use of %PUBLIC_URL% in the tags above It will be replaced with the URL of the `public` folder during the build. Only files inside the `public` folder can be referenced from the HTML. Unlike  will work correctly both with client-side routing and a non-root public URL. Learn how to configure a non-root public URL by running `npm run build",
       "price": 1,
       "size": ["XL"]
     }
