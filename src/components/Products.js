@@ -4,6 +4,7 @@ import { Fade, Zoom } from "react-reveal";
 import Modal from "react-modal";
 import { connect } from "react-redux";
 import { fetchProducts } from "../actions/productAction";
+import { addCart } from "../actions/cartActions";
 
 class Products extends Component {
   state = { product: null };
@@ -19,7 +20,7 @@ class Products extends Component {
   }
 
   render() {
-    const { products, addToCart } = this.props;
+    const { products, addCart } = this.props;
     const { product } = this.state;
     return (
       <div>
@@ -42,7 +43,7 @@ class Products extends Component {
                     <div className="product-price">
                       <div>{formats(product.price)}</div>
                       <button
-                        onClick={() => addToCart(product)}
+                        onClick={() => addCart(product)}
                         className="button button-primary"
                       >
                         장바구니에 담기
@@ -82,7 +83,7 @@ class Products extends Component {
                     <button
                       onClick={() => {
                         this.closeModal();
-                        addToCart(product);
+                        addCart(product);
                       }}
                       className="button"
                     >
@@ -101,4 +102,5 @@ class Products extends Component {
 
 export default connect((state) => ({ products: state.product.filteredItems }), {
   fetchProducts,
+  addCart,
 })(Products);

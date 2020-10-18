@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { formats } from "../util";
 import Fade from "react-reveal/Fade";
+import { connect } from "react-redux";
+import { deleteCart } from "../actions/cartActions";
 
-export default class Cart extends Component {
+class Cart extends Component {
   state = { checkOut: false, name: "", email: "", address: "" };
   showCheckOut = () => {
     this.setState({ checkOut: true });
@@ -15,19 +17,24 @@ export default class Cart extends Component {
       [name]: value,
     });
   };
+
   createOrder = (e) => {
     e.preventDefault();
-    const order = {
-      name: this.state.name,
-      email: this.state.email,
-      address: this.state.address,
-      cartItems: this.props.cartItems,
-    };
-    this.props.createOrder(order);
+    const price = this.props.cartItems.reduce(
+      (cur, items) => cur + items.price * items.count,
+      0
+    );
+    const result = window.confirm(
+      `${this.state.name}님이 선택하신 총 가격은 ${price}입니다 계속 진행하시겠습니까?`
+    );
+    if (result) {
+      window.confirm("정상 처리되었습니다");
+    }
     this.setState({ name: "", email: "", address: "" });
   };
+
   render() {
-    const { cartItems, removeItem } = this.props;
+    const { cartItems, deleteCart } = this.props;
     const { name, email, address } = this.state;
     return (
       <>
@@ -51,7 +58,7 @@ export default class Cart extends Component {
                       <div>{item.title}</div>
                       <div className="right">
                         {formats(item.price)} X {item.count}개{"   "}
-                        <button class="button" onClick={() => removeItem(item)}>
+                        <button class="button" onClick={() => deleteCart(item)}>
                           삭제하기
                         </button>
                       </div>
@@ -135,3 +142,13 @@ export default class Cart extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  const cartItems = state.cart.cartItems;
+  return { cartItems };
+};
+const mapDispatchToProps = {
+  deleteCart,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

@@ -60,7 +60,7 @@ const mapStateToProps = (state) => {
   const sort = state.product.sort;
   const products = state.product.items;
   const filteredProducts = state.product.filteredItems;
-  console.log(products, filteredProducts);
+
   return { size, sort, products, filteredProducts };
 };
 const mapDispatchToProps = {
