@@ -1,11 +1,18 @@
 import React, { Component } from "react";
 import { formats } from "../util";
 import Fade from "react-reveal/Fade";
+import Modal from "react-modal";
 import { connect } from "react-redux";
-import { deleteCart } from "../actions/cartActions";
+import { deleteCart, clearCart } from "../actions/cartActions";
+import { createOrder, clearOrder } from "../actions/orderActions";
+import { Zoom } from "react-reveal";
+import moment from "moment";
+import "moment/locale/ko";
+moment.locale("ko");
 
 class Cart extends Component {
   state = { checkOut: false, name: "", email: "", address: "" };
+
   showCheckOut = () => {
     this.setState({ checkOut: true });
   };
@@ -19,22 +26,26 @@ class Cart extends Component {
   };
 
   createOrder = (e) => {
+    const { name, email, address } = this.state;
     e.preventDefault();
-    const price = this.props.cartItems.reduce(
-      (cur, items) => cur + items.price * items.count,
-      0
-    );
-    const result = window.confirm(
-      `${this.state.name}님이 선택하신 총 가격은 ${price}입니다 계속 진행하시겠습니까?`
-    );
-    if (result) {
-      window.confirm("정상 처리되었습니다");
-    }
-    this.setState({ name: "", email: "", address: "" });
+    const order = {
+      name: name,
+      email: email,
+      address: address,
+      cartItems: this.props.cartItems,
+      total: this.props.cartItems.reduce(
+        (acc, cur) => acc + cur.price * cur.count,
+        0
+      ),
+    };
+    this.props.createOrder(order);
+    this.props.clearCart();
   };
-
+  closeModal = () => {
+    this.props.clearOrder();
+  };
   render() {
-    const { cartItems, deleteCart } = this.props;
+    const { cartItems, deleteCart, order } = this.props;
     const { name, email, address } = this.state;
     return (
       <>
@@ -45,6 +56,7 @@ class Cart extends Component {
             총 {cartItems.length}개 상품을 선택하셨습니다
           </div>
         )}
+
         <>
           <div className="cart">
             <Fade left cascade={true}>
@@ -58,7 +70,10 @@ class Cart extends Component {
                       <div>{item.title}</div>
                       <div className="right">
                         {formats(item.price)} X {item.count}개{"   "}
-                        <button class="button" onClick={() => deleteCart(item)}>
+                        <button
+                          className="button"
+                          onClick={() => deleteCart(item)}
+                        >
                           삭제하기
                         </button>
                       </div>
@@ -68,6 +83,51 @@ class Cart extends Component {
               </ul>
             </Fade>
           </div>
+          {order && (
+            <Modal isOpen={true} onRequestClose={this.closeModal}>
+              <Zoom>
+                <button className="close-modal" onClick={this.closeModal}>
+                  X
+                </button>
+                <div className="order-detail">
+                  <h3 className="success-message">
+                    주문이 정상적으로 접수되었습니다
+                  </h3>
+                  <h2>주문자 : {order.name}</h2>
+                  <ul>
+                    <li>
+                      <div>이메일:</div>
+                      <div>{order.email}</div>
+                    </li>
+                    <li>
+                      <div>주소:</div>
+                      <div>{order.address}</div>
+                    </li>
+                    <li>
+                      <div>거래 시간:</div>
+                      <div>{order.createdAt}</div>
+                    </li>
+                    <li>
+                      <div>선택한 상품:</div>
+                      <div>
+                        {order.cartItems.map((x) => (
+                          <div>
+                            {" "}
+                            {x.title} {" X "} {x.count}
+                            {"개"}
+                          </div>
+                        ))}
+                      </div>
+                    </li>
+                    <li>
+                      <div>총 가격:</div>
+                      <div>{formats(order.total)}</div>
+                    </li>
+                  </ul>
+                </div>
+              </Zoom>
+            </Modal>
+          )}
 
           {cartItems.length !== 0 && (
             <>
@@ -95,6 +155,7 @@ class Cart extends Component {
                         <li>
                           <label>이메일</label>
                           <input
+                            ref={this.focus}
                             value={email}
                             type="email"
                             name="email"
@@ -145,10 +206,15 @@ class Cart extends Component {
 
 const mapStateToProps = (state) => {
   const cartItems = state.cart.cartItems;
-  return { cartItems };
+  const order = state.order.order;
+
+  return { cartItems, order };
 };
 const mapDispatchToProps = {
   deleteCart,
+  createOrder,
+  clearOrder,
+  clearCart,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
