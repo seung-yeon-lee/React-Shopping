@@ -42,6 +42,7 @@ header {
   display: flex;
   align-items: center;
   padding: 0.5rem;
+  justify-content: space-between;
 }
 header a {
   color: #ffffff;
@@ -258,4 +259,20 @@ form {
 
 .success-message {
   color: green;
+}
+
+/* Orders */
+.orders {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+tbody > tr:nth-child(odd) {
+  background-color: #f0f0f0;
+}
+td {
+  padding: 5px;
+}
+th {
+  text-align: left;
 }
