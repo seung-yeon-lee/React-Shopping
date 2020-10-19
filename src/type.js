@@ -6,3 +6,4 @@ export const DELETE_CART = "delete_cart";
 export const CLEAR_ORDER = "clear_order";
 export const CLEAR_CART = "clear_cart";
 export const CREATE_ORDER = "create_order";
+export const FETCH_ORDERS = "fetch_orders";

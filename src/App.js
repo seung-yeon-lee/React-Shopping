@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Cart from "./components/Cart";
-import Filter from "./components/Filter";
-import Products from "./components/Products";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import HomeScreen from "./screens/HomeScreen";
+import AdminScreen from "./screens/AdminScreen";
 import { Provider } from "react-redux";
 import store from "./store";
 
@@ -9,23 +9,23 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div className="grid-container">
-          <header>
-            <a href="/">React Shooping</a>
-          </header>
-          <main>
-            <div className="content">
-              <div className="main">
-                <Filter />
-                <Products />
+        <Router>
+          <div className="grid-container">
+            <header>
+              <Link to="/">Shopping</Link>
+              <Link to="/admin">Admin</Link>
+            </header>
+            <main>
+              <div className="content">
+                <div className="main">
+                  <Route path="/" exact component={HomeScreen} />
+                  <Route path="/admin" component={AdminScreen} />
+                </div>
               </div>
-              <div className="sidebar">
-                <Cart />
-              </div>
-            </div>
-          </main>
-          <footer>All right reserved.</footer>
-        </div>
+            </main>
+            <footer>All right reserved.</footer>
+          </div>
+        </Router>
       </Provider>
     );
   }

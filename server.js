@@ -77,5 +77,10 @@ app.post("/api/orders", async (req, res) => {
   res.send(order);
 });
 
+app.get("/api/orders", async (req, res) => {
+  const orders = await Order.find({});
+  res.send(orders);
+});
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log("서버 실행 중"));
