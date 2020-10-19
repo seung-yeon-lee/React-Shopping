@@ -236,3 +236,26 @@ form {
   top: 2.5rem;
   z-index: 1000;
 }
+
+/* order detail */
+.order-detail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+}
+
+.order-detail li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-detail li div {
+  padding: 1rem;
+}
+
+.success-message {
+  color: green;
+}

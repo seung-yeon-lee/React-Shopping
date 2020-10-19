@@ -42,6 +42,40 @@ app.delete("/api/products/:id", async (req, res) => {
   const deletedProduct = await Product.findByIdAndDelete(req, params.id);
   res.send(deletedProduct);
 });
+// ---------------- Order 설정 ------------------
+const Order = mongoose.model(
+  "order",
+  new mongoose.Schema(
+    {
+      _id: { type: String, default: shortid.generate },
+      email: String,
+      name: String,
+      address: String,
+      total: Number,
+      cartItems: [
+        {
+          _id: String,
+          title: String,
+          price: Number,
+          count: Number,
+        },
+      ],
+    },
+    {
+      timestamps: true,
+    }
+  )
+);
+
+app.post("/api/orders", async (req, res) => {
+  const { email, name, address, total, cartItems } = req.body;
+  if (!name || !email || !address || !total || !cartItems) {
+    return res.send({ message: "필수 항목이 누락되었습니다." });
+  }
+  const order = await Order(req.body).save();
+  console.log(order);
+  res.send(order);
+});
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log("서버 실행 중"));

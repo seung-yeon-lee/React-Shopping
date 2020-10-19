@@ -30,7 +30,7 @@ class Products extends Component {
           ) : (
             <ul className="products">
               {products.map((product) => (
-                <li key={product.id}>
+                <li key={product._id}>
                   <div className="product">
                     <a href={"#" + product._id}>
                       <img
